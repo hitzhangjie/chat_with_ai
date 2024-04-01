@@ -1,9 +1,9 @@
 hitzhangjie:
------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 could you explain vscode architecture?
 
 GitHub Copilot:
------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 Sure, Visual Studio Code (VS Code) has a layered architecture that consists of the following main components:
 
 Editor: This is the core part of VS Code. It's responsible for text editing functionalities, syntax highlighting, code folding, and other text editing features. It's built on a library called Monaco, which is also used in Azure DevOps and other Microsoft products.
