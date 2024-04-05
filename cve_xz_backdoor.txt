@@ -1,6 +1,20 @@
 Timeline of the xz open source attack: https://research.swtch.com/xz-timeline
+The xz attack shell script：https://research.swtch.com/xz-script
+这里有个xzbot演示了如何利用这个backdoor进行攻击：https://github.com/amlweems/xzbot
 
-xz开源项目的贡献者Jia Tan通过持续贡献获得了项目的维护权限，他后来像liblzma（xz的一部分）植入了后门，同时liblzma碰巧又是其他一些项目的依赖，比如大名鼎鼎的OpenSSH sshd，OpenSSH sshd在很多Linux Distros中被使用，如Debian、Ubuntu、Fedora以及其他基于systemd的Linux系统并且patch了sshd去链接到libsystemd，libsystemd也依赖liblzma。
+```
+Andres Freund published the existence of the xz attack on 2024-03-29 to the public oss-security@openwall mailing list. The day before, he alerted Debian security and the (private) distros@openwall list. In his mail, he says that he dug into this after “observing a few odd symptoms around liblzma (part of the xz package) on Debian sid installations over the last weeks (logins with ssh taking a lot of CPU, valgrind errors).”
+
+At a high level, the attack is split in two pieces: a shell script and an object file. There is an injection of shell code during configure, which injects the shell code into make. The shell code during make adds the object file to the build. This post examines the shell script. (See also my timeline post.)
+
+The nefarious object file would have looked suspicious checked into the repository as evil.o, so instead both the nefarious shell code and object file are embedded, compressed and encrypted, in some binary files that were added as “test inputs” for some new tests. The test file directory already existed from long before Jia Tan arrived, and the README explained “This directory contains bunch of files to test handling of .xz, .lzma (LZMA_Alone), and .lz (lzip) files in decoder implementations. Many of the files have been created by hand with a hex editor, thus there is no better "source code" than the files themselves.” This is a fact of life for parsing libraries like liblzma. The attacker looked like they were just adding a few new test files.
+
+Unfortunately the nefarious object file turned out to have a bug that caused problems with Valgrind, so the test files needed to be updated to add the fix. That commit explained “The original files were generated with random local to my machine. To better reproduce these files in the future, a constant seed was used to recreate these files.” The attackers realized at this point that they needed a better update mechanism, so the new nefarious script contains an extension mechanism that lets it look for updated scripts in new test files, which wouldn’t draw as much attention as rewriting existing ones.
+
+The effect of the scripts is to arrange for the nefarious object file’s _get_cpuid function to be called as part of a GNU indirect function (ifunc) resolver. In general these resolvers can be called lazily at any time during program execution, but for security reasons it has become popular to call all of them during dynamic linking (very early in program startup) and then map the global offset table (GOT) and procedure linkage table (PLT) read-only, to keep buffer overflows and the like from being able to edit it. But a nefarious ifunc resolver would run early enough to be able to edit those tables, and that’s exactly what the backdoor introduced. The resolver then looked through the tables for RSA_public_decrypt and replaced it with a nefarious version that runs attacker code when the right SSH certificate is presented.
+```
+
+总结下：xz开源项目的贡献者Jia Tan通过持续贡献获得了项目的维护权限，他后来像liblzma（xz的一部分）植入了后门，同时liblzma碰巧又是其他一些项目的依赖，比如大名鼎鼎的OpenSSH sshd，OpenSSH sshd在很多Linux Distros中被使用，如Debian、Ubuntu、Fedora以及其他基于systemd的Linux系统并且patch了sshd去链接到libsystemd，libsystemd也依赖liblzma。
 
 该后门在 SSH 会话开始时能监听攻击者发送的隐藏命令，使攻击者能够在不完成登录鉴权的情况下在目标系统上运行任意命令，不用经过身份验证的、有针对性的远程代码执行，可怕！CVE评级10.0 critical。不过目前并没有Linux Distros的stable版本引入此问题，所以攻击面、影响面其实应该是有限的。
 
@@ -28,3 +42,4 @@ xz开源项目的贡献者Jia Tan通过持续贡献获得了项目的维护权�
 - 攻击者如何向dynamic linker中注册了一个登录验证函数的钩子，_dl_audit_symbind
 - 又是如何将某个特定函数符号，解析到指定地址的
 - `-Wl,-z,no`, `LD_BIND_NOT=1`, `-Wl,-z,relro` ，对编译期、连接器而言，这几个不同的选项控制的是什么效果？
+
