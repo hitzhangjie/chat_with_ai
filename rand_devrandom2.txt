@@ -40,3 +40,7 @@ func main() {
         }
 }
 ```
+
+ps: Also see `man 2 getrandom(buf, size, flags)`, which is a linux syscall 
+to read random data from /dev/urandom or /dev/random.
+It works in blocking or non-blocking mode, it is controlled by the flag.
