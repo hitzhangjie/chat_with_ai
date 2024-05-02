@@ -2,6 +2,8 @@ hitzhangjie:
 ------------------------------------------------------------------------------
 If I use vim y or x to copy/cut, if i press any other edit actions before press p to paste, the copied/cut content will be dropped, how to work around this?
 
+ps: in a nutshell, we can use `1y` to copy and `1p` to paste.
+
 gemma:
 ------------------------------------------------------------------------------
 **Solution 1: Use "+y/x command:**
