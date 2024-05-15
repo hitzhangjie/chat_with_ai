@@ -1,0 +1,23 @@
+hitzhangjie:
+------------------------------------------------------------------------------
+linux how to revert the lines order in one just command?
+
+llama3:
+------------------------------------------------------------------------------
+A nice and simple question!
+
+To reverse the order of lines in a file (or output) in Linux, you can use the `tac` command. It's similar to the `cat` command, but it prints the lines in reverse order.
+
+Here are a few examples:
+
+```
+* `tac file.txt`: Reverses the order of the lines in the file `file.txt`.
+* `tac - | less`: Pipes the output of `tac` (reversed lines) to `less`, allowing you to page through the output.
+* `tac file.txt | grep pattern`: Searches for a specific pattern in the reversed lines.
+```
+
+So, if you want to revert the order of lines in one command, just use:
+```bash
+tac your_file.txt
+```
+Replace `your_file.txt` with the name of your file.
