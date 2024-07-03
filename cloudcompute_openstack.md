@@ -8,7 +8,7 @@ A:
 >
 > 云计算技术栈图
 >
-> ```graphviz
+> ```mermaid
 > graph TD
 >     A[物理机/裸机] --> B[OpenStack]
 >     B --> C[虚拟机]
