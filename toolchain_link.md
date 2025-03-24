@@ -156,3 +156,30 @@ this line means: the data at the address 00000000001f should be patched to the o
   400588:       0f 1f 84 00 00 00 00    nopl   0x0(%rax,%rax,1)
   40058f:       00
 ```
+
+ps: how about dynamic linking? if i change the source code to following, `printf` called.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(int argc, char *argv[])
+{
+    printf("hello world\n");
+    return 0;
+}
+```
+
+```bash
+$ readelf -r main.o
+
+Relocation section '.rela.text' at offset 0x1f8 contains 2 entries:
+  Offset          Info           Type           Sym. Value    Sym. Name + Addend
+000000000010  00050000000a R_X86_64_32       0000000000000000 .rodata + 0
+000000000015  000a00000004 R_X86_64_PLT32    0000000000000000 puts - 4 <==!!! PLT32, puts
+
+Relocation section '.rela.eh_frame' at offset 0x228 contains 1 entry:
+  Offset          Info           Type           Sym. Value    Sym. Name + Addend
+000000000020  000200000002 R_X86_64_PC32     0000000000000000 .text + 0
+```
+
