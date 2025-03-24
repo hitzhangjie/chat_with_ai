@@ -157,6 +157,8 @@ this line means: the data at the address 00000000001f should be patched to the o
   40058f:       00
 ```
 
+---
+
 ps: how about dynamic linking? if i change the source code to following, `printf` called.
 
 ```c
@@ -183,3 +185,23 @@ Relocation section '.rela.eh_frame' at offset 0x228 contains 1 entry:
 000000000020  000200000002 R_X86_64_PC32     0000000000000000 .text + 0
 ```
 
+if we build it into an final executable `gcc -o main main.c`, then check the relocation entries:
+
+```bash
+$ readelf -r main
+
+Relocation section '.rela.dyn' at offset 0x3e8 contains 4 entries:
+  Offset          Info           Type           Sym. Value    Sym. Name + Addend
+000000600fe0  000100000006 R_X86_64_GLOB_DAT 0000000000000000 _ITM_deregisterTMClone + 0
+000000600fe8  000300000006 R_X86_64_GLOB_DAT 0000000000000000 __libc_start_main@GLIBC_2.2.5 + 0
+000000600ff0  000400000006 R_X86_64_GLOB_DAT 0000000000000000 __gmon_start__ + 0
+000000600ff8  000500000006 R_X86_64_GLOB_DAT 0000000000000000 _ITM_registerTMCloneTa + 0
+
+Relocation section '.rela.plt' at offset 0x448 contains 1 entry:
+  Offset          Info           Type           Sym. Value    Sym. Name + Addend
+000000601018  000200000007 R_X86_64_JUMP_SLO 0000000000000000 puts@GLIBC_2.2.5 + 0
+```
+
+so, you'll see, the relocation entries is recorded in the .rela.dyn, .rela.plt.
+
+And we'll learn about .plt, .got.plt in the future.
