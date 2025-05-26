@@ -1,7 +1,31 @@
 # Understanding Assembly: Test Instruction in Go
 _Exported on 5/26/2025 at 12:57:20 GMT+8 from Cursor (0.50.6)_
 
+
+
 ---
+
+```go
+package main
+
+import "runtime/debug"
+
+type Student struct {
+        Age int
+}
+
+func main() {
+        var s *Student
+        defer func() {
+                if e := recover(); e != nil {
+                        debug.PrintStack()
+                }
+        }()
+
+        println(s.Age)
+        println("hello")
+}
+```
 
 **User**
 
