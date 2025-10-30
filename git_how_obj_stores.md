@@ -1,12 +1,18 @@
-test/git 刚刚执行过 git init完成初始化
+总结下吧：
+working area里的修改保存，不会生成新的object；
+working area里的修改staging后，会生成新的blob object；
+staging的修改commit后，会生成新的commit object，tree object；
 
 ---
 
-hangjie 🦀 git $ tree .
+```bash
+zhangjie 🦀 git $ git init
+zhangjie 🦀 git $ tree .
 .
 └── f1
 
 1 directory, 1 file
+
 zhangjie 🦀 git (master) $ tree -a
 .
 ├── .git
@@ -39,6 +45,11 @@ zhangjie 🦀 git (master) $ tree -a
 └── f1
 
 10 directories, 19 files
+```
+
+```bash
+zhangjie 🦀 git (master) $ touch f1
+zhangjie 🦀 git (master) $ git add f1
 zhangjie 🦀 git (master) $ tree -a
 .
 ├── .git
@@ -77,9 +88,18 @@ zhangjie 🦀 git (master) $ tree -a
 zhangjie 🦀 git (master) $ git cat-file -t e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
 blob
 zhangjie 🦀 git (master) $ git cat-file blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+zhangjie 🦀 git (master) $ 
+```
+
+
+```
+zhangjie 🦀 git (master) $ echo "hello" > f1
 zhangjie 🦀 git (master) $ git cat-file blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
-zhangjie 🦀 git (master) $ ls
-f1
+zhangjie 🦀 git (master) $ 
+```
+
+```bash
+zhangjie 🦀 git (master) $ git add f1
 zhangjie 🦀 git (master) $ tree -a
 .
 ├── .git
@@ -119,6 +139,10 @@ zhangjie 🦀 git (master) $ tree -a
 12 directories, 22 files
 zhangjie 🦀 git (master) $ git cat-file blob ce013625030ba8dba906f756967f9e9ca394464a
 hello
+```
+
+```bash
+zhangjie 🦀 git (master) $ git commit -m 'add f1'
 zhangjie 🦀 git (master) $ tree -a
 .
 ├── .git
@@ -175,27 +199,18 @@ author hitzhangjie <hit.zhangjie@gmail.com> 1761797659 +0800
 committer hitzhangjie <hit.zhangjie@gmail.com> 1761797659 +0800
 
 add f1
-zhangjie 🦀 git (master) $ git cat-file -t 4fe35f6b9fb42474cece84a668e6788c756803
-fatal: Not a valid object name 4fe35f6b9fb42474cece84a668e6788c756803
 zhangjie 🦀 git (master) $ git cat-file -t b94fe35f6b9fb42474cece84a668e6788c756803
 tree
-zhangjie 🦀 git (master) $ git cat-file tree b94fe35f6b9fb42474cece84a668e6788c756803
-100644 f1?6%
-            ?۩?V?????FJzhangjie 🦀 git (treester) $ git cat-file -t b94fe35f6b9fb42474cece84a668e6788c75680
-100644 f1?6%
-            ?۩?V?????FJzhangjie 🦀 git (master) $ git cat-file -p b94fe35f6b9fb42474cece84a668e6788c756803
-100644 blob ce013625030ba8dba906f756967f9e9ca394464a	f1
-zhangjie 🦀 git (master) $ 
-zhangjie 🦀 git (master) $ 
 zhangjie 🦀 git (master) $ git cat-file -p b94fe35f6b9fb42474cece84a668e6788c756803
 100644 blob ce013625030ba8dba906f756967f9e9ca394464a	f1
+zhangjie 🦀 git (master) $ 
+```
 
-zhangjie 🦀 git (master) $ 
-zhangjie 🦀 git (master) $ 
+```bash
+zhangjie 🦀 git (master) $ mkdir a b c
+zhangjie 🦀 git (master) $ touch a/f1 b/f1 c/f1
 zhangjie 🦀 git (master) $ git cat-file -p b94fe35f6b9fb42474cece84a668e6788c756803
 100644 blob ce013625030ba8dba906f756967f9e9ca394464a	f1
-zhangjie 🦀 git (master) $ 
-zhangjie 🦀 git (master) $ 
 zhangjie 🦀 git (master) $ tree -a
 .
 ├── .git
@@ -250,6 +265,11 @@ zhangjie 🦀 git (master) $ tree -a
 └── f1
 
 20 directories, 31 files
+```
+
+```bash
+zhangjie 🦀 git (master) $ git add a b c
+zhangjie 🦀 git (master) $ git cc -m 'add folders'
 zhangjie 🦀 git (master) $ tree -a
 .
 ├── .git
@@ -324,3 +344,4 @@ tree
 zhangjie 🦀 git (master) $ git cat-file -p 56e3dd6f60494c9bbe56ea178b9a86c91d3139c6
 100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391	f1
 zhangjie 🦀 git (master) $ git cat-file blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+```
