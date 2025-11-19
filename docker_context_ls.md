@@ -5,6 +5,50 @@ docker context ls 通过以下方式找到所有的 context：
   1. 扫描配置目录: 读取 ~/.docker/contexts/meta/ 目录下的所有子目录
     - 每个子目录以 context 的哈希值命名（如 f24fd3749c...）
     - 每个子目录包含一个 meta.json 文件，存储 context 的元数据
+
+     存储结构
+
+     ```bash
+     $ tree ~/.docker/
+      ├── config.json              # 存储 currentContext
+      └── contexts/
+          └── meta/
+              ├── <hash1>/
+              │   └── meta.json    # colima context 配置
+              └── <hash2>/
+                  └── meta.json    # desktop-linux context 配置
+    ```
+
+    看下下面的数据：
+
+    ```bash
+    $ for i in `find ~/.docker/contexts/ -type f meta.json`; do cat $i | jq ; done
+    {
+      "Name": "colima",
+      "Metadata": {
+        "Description": "colima"
+      },
+      "Endpoints": {
+        "docker": {
+          "Host": "unix:///Users/zhangjie/.colima/default/docker.sock",
+          "SkipTLSVerify": false
+        }
+      }
+    }
+    {
+      "Name": "desktop-linux",
+      "Metadata": {
+        "Description": "Docker Desktop"
+      },
+      "Endpoints": {
+        "docker": {
+          "Host": "unix:///Users/zhangjie/.docker/run/docker.sock",
+          "SkipTLSVerify": false
+        }
+      }
+    }
+    ```
+
   2. 读取元数据: 解析每个 meta.json 文件，获取：
     - Name: context 名称
     - Metadata.Description: 描述信息
@@ -14,14 +58,29 @@ docker context ls 通过以下方式找到所有的 context：
     - 基于当前 DOCKER_HOST 环境变量生成
   4. 标记当前 context: 从 ~/.docker/config.json 的 currentContext 字段读取当前激活的 context，在列表中标记 *
 
-  存储结构
-
-  ~/.docker/
-  ├── config.json              # 存储 currentContext
-  └── contexts/
-      └── meta/
-          ├── <hash1>/
-          │   └── meta.json    # colima context 配置
-          └── <hash2>/
-              └── meta.json    # desktop-linux context 配置
+    ```bash
+    $ cat ~/.docker/config.json
+    {
+    	"auths": {
+    		"https://index.docker.io/v1/": {
+    			"auth": "aGl0emhhbmdqaWU6ZGNrcl9wYXRfWDNIcnB4cVRHRmI2TWZJLUp0Rk9PdGxqdGdJ"
+    		}
+    	},
+    	"currentContext": "colima",
+    	"plugins": {
+    		"-x-cli-hints": {
+    			"enabled": "true"
+    		},
+    		"debug": {
+    			"hooks": "exec"
+    		},
+    		"scout": {
+    			"hooks": "pull,buildx build"
+    		}
+    	},
+    	"features": {
+    		"hooks": "true"
+    	}
+    }
+    ```
 
