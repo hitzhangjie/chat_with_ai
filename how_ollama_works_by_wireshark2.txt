@@ -1,0 +1,70 @@
+POST /api/chat HTTP/1.1
+Host: 0.0.0.0:11434
+User-Agent: ollama/0.0.0 (arm64 darwin) Go/go1.25.0
+Content-Length: 4143
+Accept: application/x-ndjson
+Content-Type: application/json
+Accept-Encoding: gzip
+
+{"model":"gpt-oss","messages":[{"role":"user","content":"今天，深圳气温是多少"},{"role":"assistant","content":"","thinking":"The user asks: \"今天，深圳气温是多少\" - \"What is the temperature in Shenzhen today?\" The user wants current weather. We need up-to-date info. We can use web_search tool to find current temperature. Then respond.","tool_calls":[{"id":"call_9qx8kysv","function":{"index":0,"name":"web_search","arguments":{"query":"深圳 今日 气温"}}}]},{"role":"tool","content":"Search results for: 深圳 今日 气温\n\n1. 天气实况与预报-深圳市气象局（台）\n   URL: https://weather.sz.gov.cn/mobile/qixiangfuwu/yubaofuwu/jinmingtianqiyubao/\n   [![](https://weather.sz.gov.cn/mobile/qixiangfuwu/yubaofuwu/jinmingtianqiyubao/)](javascript:void(0))\n\n[![深圳市气象局（台）](https://weather.sz.gov.cn/toper/images/logo.svg)](https://weather.sz.gov.cn/mobile/)\n\n[关怀版](javascript:void(0))![搜索](https://weather.sz.gov.cn/toper/images/nav-ss.png)![菜单](https://we...\n\n2. 深圳 - 百度\n   URL: http://weathernew.pae.baidu.com/weathernew/pc?query=%E5%B9%BF%E4%B8%9C%E6%B7%B1%E5%9C%B3%E5%A4%A9%E6%B0%94\u0026srcid=4982\u0026city_name=%E6%B7%B1%E5%9C%B3\u0026province_name=%E5%B9%BF%E4%B8%9C\n   [![](https://weathernew.pae.baidu.com/static/weathernew/static/image/logo_top@2_43ce9c8.png)](https://www.baidu.com/)\n\n深圳今天：晴\n16°~27°C\n东北风2级\n\n02月16日周日农历正月十九\n\n18°\n\n44优\n\n晴西风\n1级\n\n湿度91%日出06:55日落18:21\n\n24小时预报\n\n- 温度\n- 降水量\n- 风力风向\n- 空气质量\n\n27°C22°C16°C\n\n现在\n\n03:00\n\n04:00\n\n05:00\n\n06:00\n\n07:00\n\n08:00\n\n09:00\n\n10...\n\n3. 深圳市天气预报_天气查询- 墨迹天气\n   URL: https://tianqi.moji.com/weather/china/guangdong/shenzhen\n   【深圳市天气】\\_深圳市天气预报\\_天气查询 - 墨迹天气[![墨迹天气](https://h5tq.moji.com/tianqi/assets/images/index/i_logo.png)](http://www.moji.com/)\n[*![](https://h5tq.moji.com/tianqi/assets/images/icon/phone.png)*随时随地 想查就查](http://www.moji.com/mjsoft/)\n[首页](http://www.moji.com/)[天气](https://tianqi.moji.com)[下载](http://www.mo...\n\n4. 深圳天气预报,深圳7天天气预报,深圳15天天气预报,深圳天气查询\n   URL: https://www.weather.com.cn/weather/101280601.shtml\n   深圳天气预报,深圳7天天气预报,深圳15天天气预报,深圳天气查询\n[首页](http://www.weather.com.cn/)[预报](http://www.weather.com.cn/forecast/)[预警](http://www.weather.com.cn/alarm/)[雷达](http://www.weather.com.cn/radar/index2021.shtml)[云图](http://www.weather.com.cn/satellite/)[天气地图](http://www.weather.com.cn/radar/)[专业产品](http://product...\n\n5. 深圳 - 中国气象局-天气预报-城市预报\n   URL: https://weather.cma.cn/web/weather/59493.html\n   中国气象局-天气预报-城市预报\n1. [首页](https://weather.cma.cn/)\n2. [国内](https://weather.cma.cn/web/text/area.html)\n3. [广东](https://weather.cma.cn/web/text/HN/AGD.html)\n4. 深圳**\n国内* 国内* 国外|\n广东* 北京市* 天津市* 河北省* 山西省* 内蒙古自治区* 辽宁省* 吉林省* 黑龙江省* 上海市* 江苏省* 浙江省* 安徽省* 福建省* 江西省* 山东省* 河南省* 湖北省* 湖南省* 广东省* 广西壮族自治区* 海南省* 重庆市* 四川省* ...\n\n","tool_call_id":"call_9qx8kysv"}],"tools":[{"type":"function","function":{"name":"bash","description":"Execute a bash command on the system. Use this to run shell commands, check files, run programs, etc.","parameters":{"type":"object","required":["command"],"properties":{"command":{"type":"string","description":"The bash command to execute"}}}}},{"type":"function","function":{"name":"web_search","description":"Search the web for current information. Use this when you need up-to-date information that may not be in your training data.","parameters":{"type":"object","required":["query"],"properties":{"query":{"type":"string","description":"The search query to look up on the web"}}}}}],"options":{},"think":true}
+HTTP/1.1 200 OK
+Content-Type: application/x-ndjson
+Date: Thu, 08 Jan 2026 11:21:20 GMT
+Transfer-Encoding: chunked
+
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.239979Z","message":{"role":"assistant","content":"","thinking":"We"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.260772Z","message":{"role":"assistant","content":"","thinking":" need"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.281734Z","message":{"role":"assistant","content":"","thinking":" to"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.302166Z","message":{"role":"assistant","content":"","thinking":" extract"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.322516Z","message":{"role":"assistant","content":"","thinking":" the"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.343213Z","message":{"role":"assistant","content":"","thinking":" current"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.363497Z","message":{"role":"assistant","content":"","thinking":" temperature"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.383867Z","message":{"role":"assistant","content":"","thinking":"."},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.404043Z","message":{"role":"assistant","content":"","thinking":" The"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.424441Z","message":{"role":"assistant","content":"","thinking":" search"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.444728Z","message":{"role":"assistant","content":"","thinking":" result"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.465123Z","message":{"role":"assistant","content":"","thinking":" shows"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.485439Z","message":{"role":"assistant","content":"","thinking":" a"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.505912Z","message":{"role":"assistant","content":"","thinking":" snippet"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.526192Z","message":{"role":"assistant","content":"","thinking":":"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.546502Z","message":{"role":"assistant","content":"","thinking":" \""},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.56643Z","message":{"role":"assistant","content":"","thinking":"深圳"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.586744Z","message":{"role":"assistant","content":"","thinking":"今天"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.60709Z","message":{"role":"assistant","content":"","thinking":"："},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.627353Z","message":{"role":"assistant","content":"","thinking":"晴"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.647739Z","message":{"role":"assistant","content":"","thinking":" "},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.66797Z","message":{"role":"assistant","content":"","thinking":"16"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.688346Z","message":{"role":"assistant","content":"","thinking":"°"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.708643Z","message":{"role":"assistant","content":"","thinking":"~"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.728834Z","message":{"role":"assistant","content":"","thinking":"27"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.749258Z","message":{"role":"assistant","content":"","thinking":"°C"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.769556Z","message":{"role":"assistant","content":"","thinking":" 东"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.789752Z","message":{"role":"assistant","content":"","thinking":"北"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.810059Z","message":{"role":"assistant","content":"","thinking":"风"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.830485Z","message":{"role":"assistant","content":"","thinking":"2"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.850966Z","message":{"role":"assistant","content":"","thinking":"级"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.871176Z","message":{"role":"assistant","content":"","thinking":"\"."},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.891463Z","message":{"role":"assistant","content":"","thinking":" That"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.911995Z","message":{"role":"assistant","content":"","thinking":" is"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.932356Z","message":{"role":"assistant","content":"","thinking":" the"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.952635Z","message":{"role":"assistant","content":"","thinking":" range"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.972969Z","message":{"role":"assistant","content":"","thinking":"."},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:20.99328Z","message":{"role":"assistant","content":"","thinking":" But"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:21.013679Z","message":{"role":"assistant","content":"","thinking":" we"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:21.033852Z","message":{"role":"assistant","content":"","thinking":" need"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:21.054097Z","message":{"role":"assistant","content":"","thinking":" current"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:21.074386Z","message":{"role":"assistant","content":"","thinking":" temperature"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:21.094765Z","message":{"role":"assistant","content":"","thinking":"."},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:21.114965Z","message":{"role":"assistant","content":"","thinking":" Maybe"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:21.137306Z","message":{"role":"assistant","content":"","thinking":" the"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:21.157475Z","message":{"role":"assistant","content":"","thinking":" webpage"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:21.177987Z","message":{"role":"assistant","content":"","thinking":" includes"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:21.198476Z","message":{"role":"assistant","content":"","thinking":" current"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:21.218948Z","message":{"role":"assistant","content":"","thinking":"."},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:21.239144Z","message":{"role":"assistant","content":"","thinking":" Let's"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:21.259483Z","message":{"role":"assistant","content":"","thinking":" open"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:21.279768Z","message":{"role":"assistant","content":"","thinking":" result"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:21.299999Z","message":{"role":"assistant","content":"","thinking":" "},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:21.320421Z","message":{"role":"assistant","content":"","thinking":"2"},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:21.340785Z","message":{"role":"assistant","content":"","thinking":"."},"done":false}
+{"model":"gpt-oss","created_at":"2026-01-08T11:21:23.803833Z","message":{"role":"assistant","content":"","tool_calls":[{"id":"call_2tx69p7a","function":{"index":0,"name":"bash","arguments":{"command":"curl -sL 'http://weathernew.pae.baidu.com/weathernew/pc?query=%E5%B9%BF%E4%B8%9C%E6%B7%B1%E5%9C%B3%E5%A4%A9%E6%B0%94\u0026srcid=4982\u0026city_name=%E6%B7%B1%E5%9C%B3\u0026province_name=%E5%B9%BF%E4%B8%9C' | head"}}}]},"done":true,"done_reason":"stop","total_duration":11160523791,"load_duration":4656446791,"prompt_eval_count":1215,"prompt_eval_duration":2793428417,"eval_count":179,"eval_duration":3590325789}
