@@ -59,6 +59,21 @@ func allocate2() []byte {
    - 跳过运行时 size class 计算
    - 对小于 512 字节的分配最高提升 30%
 
+### 更多版本对比数据
+
+| Go Version | Benchmark | Time/Operation |
+|---|---|---|
+| go1.21.0 | allocate1 | 131.3 ns/op |
+| go1.21.0 | allocate2 | 132.7 ns/op |
+| go1.22.0 | allocate1 | 132.3 ns/op |
+| go1.22.0 | allocate2 | 129.6 ns/op |
+| go1.24.1 | allocate1 | 133.6 ns/op |
+| go1.24.1 | allocate2 | 130.6 ns/op |
+| go1.26rc1 | allocate1 | 200.3 ns/op |
+| go1.26rc1 | allocate2 | 0.1546 ns/op |
+| go1.26rc1+未优化内联 | allocate1 | 197.6 ns/op |
+| go1.26rc1+未优化内联 | allocate2 | 142.9 ns/op |
+
 ## 结论
 
 - **Go 1.24**：`append` 方式因 `duffzero` 优化而略快
